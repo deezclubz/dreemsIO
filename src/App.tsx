@@ -4,7 +4,7 @@ import { useSyncDemo } from '@tldraw/sync'
 import 'tldraw/tldraw.css'
 
 const App = () => {
-	const store = useSyncDemo({ roomId: 'myapp-abc123' })
+	const store = useSyncDemo({ roomId: 'dreemsIO' })
 	return (
 		<>
 			<h1>yo!</h1>
