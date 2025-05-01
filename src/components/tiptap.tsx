@@ -1,11 +1,6 @@
 import { FC } from 'react'
 
-import {
-	FloatingMenu,
-	BubbleMenu,
-	EditorContent,
-	useEditor,
-} from '@tiptap/react'
+import { FloatingMenu, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { MenuBar } from './tiptap-menubar'
 import Underline from '@tiptap/extension-underline'
@@ -29,9 +24,6 @@ const Tiptap: FC = () => {
 					<FloatingMenu editor={editor}>
 						<button>Меню</button>
 					</FloatingMenu>
-					<BubbleMenu editor={editor}>
-						<button>Выделенное</button>
-					</BubbleMenu>
 				</>
 			)}
 			<MenuBar editor={editor} />
