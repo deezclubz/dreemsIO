@@ -1,16 +1,17 @@
-import './App.css'
-import { Tldraw } from 'tldraw'
-import { useSyncDemo } from '@tldraw/sync'
 import 'tldraw/tldraw.css'
+import Tiptap from './components/tiptap'
+// import { Tildraw } from './components/tildraw'
 
 const App = () => {
-	const store = useSyncDemo({ roomId: 'dreemsIO' })
 	return (
 		<>
 			<h1>yo!</h1>
-			<div style={{ position: 'fixed', inset: 0 }}>
-				<Tldraw store={store} />
-			</div>
+			{/* <div>
+				<button>Go To Tildraw</button>
+				<Tildraw />
+				<button>Go To Tiptap</button>
+			</div> */}
+			<Tiptap />
 		</>
 	)
 }
