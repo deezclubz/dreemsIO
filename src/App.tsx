@@ -33,7 +33,9 @@ const App = () => {
 			<h1 className="text-3xl font-bold underline">yo!</h1>
 			{!selectedLib && (
 				<div className="flex gap-4 mb-4">
-					<button onClick={() => setSelectedLib('tildraw')}>Test Tldraw</button>
+					<button onClick={() => setSelectedLib('tildraw')}>
+						Test Tildraw
+					</button>
 					<button onClick={() => setSelectedLib('tiptap')}>Test Tiptap</button>
 				</div>
 			)}
