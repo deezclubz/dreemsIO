@@ -1,4 +1,4 @@
-import { RemoteTLStoreWithStatus } from '@tldraw/sync'
+import { RemoteTLStoreWithStatus, useSyncDemo } from '@tldraw/sync'
 import {
 	DefaultKeyboardShortcutsDialog,
 	DefaultKeyboardShortcutsDialogContent,
@@ -72,7 +72,14 @@ interface TildrawProps {
 	unfurlBookmarkUrl: (args: { url: string }) => Promise<TLBookmarkAsset>
 }
 export const Tildraw:React.FC<TildrawProps> = (props) => {
-	const { store,unfurlBookmarkUrl } = props
+	const { 
+		// store,
+		unfurlBookmarkUrl 
+	} = props
+
+
+	const store = useSyncDemo({ roomId: 'dreemsIO' })
+
 	return (
 		<div className="tldraw__editor" style={{ height: '100vh' }}>
 			<div
