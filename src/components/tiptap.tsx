@@ -1,16 +1,42 @@
-import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react'
+import { FC } from 'react'
+
+import {
+	FloatingMenu,
+	BubbleMenu,
+	EditorContent,
+	useEditor,
+} from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { MenuBar } from './tiptap-menubar'
+import Underline from '@tiptap/extension-underline'
+import TextAlign from '@tiptap/extension-text-align'
 
-const extensions = [StarterKit]
-
-const content = '<p>Hello World!</p>'
-
-const Tiptap = () => {
+const Tiptap: FC = () => {
+	const editor = useEditor({
+		extensions: [
+			StarterKit,
+			Underline,
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
+		],
+		content: '<blockquote>Hello World!</blockquote>',
+	})
 	return (
-		<EditorProvider extensions={extensions} content={content}>
-			<FloatingMenu editor={null}>This is the floating menu</FloatingMenu>
-			<BubbleMenu editor={null}>This is the bubble menu</BubbleMenu>
-		</EditorProvider>
+		<div className="border p-4 rounded-md">
+			{editor && (
+				<>
+					<FloatingMenu editor={editor}>
+						<button>Меню</button>
+					</FloatingMenu>
+					<BubbleMenu editor={editor}>
+						<button>Выделенное</button>
+					</BubbleMenu>
+				</>
+			)}
+			<MenuBar editor={editor} />
+			<EditorContent editor={editor} className="min-h-[150px] outline-none" />
+		</div>
 	)
 }
 
