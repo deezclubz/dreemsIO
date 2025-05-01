@@ -1,6 +1,4 @@
 import { RemoteTLStoreWithStatus } from '@tldraw/sync'
-import { TLBookmarkAsset, Tldraw } from 'tldraw'
-import { useSyncDemo } from '@tldraw/sync'
 import {
 	DefaultKeyboardShortcutsDialog,
 	DefaultKeyboardShortcutsDialogContent,
@@ -15,6 +13,7 @@ import {
 	toRichText,
 	useIsToolSelected,
 	useTools,
+	TLBookmarkAsset
 } from 'tldraw'
 import { StickerTool } from './tldrawTools/test-tool'
 
