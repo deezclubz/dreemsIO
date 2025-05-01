@@ -1,3 +1,5 @@
+import { RemoteTLStoreWithStatus } from '@tldraw/sync'
+import { TLBookmarkAsset, Tldraw } from 'tldraw'
 import { useSyncDemo } from '@tldraw/sync'
 import {
 	DefaultKeyboardShortcutsDialog,
@@ -65,8 +67,13 @@ const assetUrls: TLUiAssetUrlOverrides = {
 	},
 }
 
-export const Tildraw = () => {
-	const store = useSyncDemo({ roomId: 'dreemsIO' })
+
+interface TildrawProps {
+	store: RemoteTLStoreWithStatus
+	unfurlBookmarkUrl: (args: { url: string }) => Promise<TLBookmarkAsset>
+}
+export const Tildraw:React.FC<TildrawProps> = (props) => {
+	const { store,unfurlBookmarkUrl } = props
 	return (
 		<div className="tldraw__editor" style={{ height: '100vh' }}>
 			<div
@@ -80,6 +87,11 @@ export const Tildraw = () => {
 					overrides={uiOverrides}
 					initialState="select"
 					onMount={(editor) => {
+             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						// @ts-expect-error
+						window.editor = editor
+						// when the editor is ready, we need to register out bookmark unfurling service
+						editor.registerExternalAssetHandler('url', unfurlBookmarkUrl)
 						editor.createShape<TLTextShape>({
 							type: 'text',
 							x: 100,
