@@ -1,9 +1,11 @@
 import 'tldraw/tldraw.css'
-import { MainFeatures } from './components/temp/main-features'
+import { Plug } from './components/temp/plug'
+// import { MainFeatures } from './components/temp/main-features'
 const App = () => {
 	return (
 		<>
-			<MainFeatures />
+			{/* <MainFeatures /> */}
+			<Plug />
 		</>
 	)
 }
