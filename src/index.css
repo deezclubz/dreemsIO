@@ -10,13 +10,13 @@
 }
 
 html {
-	@apply scroll-smooth min-h-[100svh] font-ThatThatNewRomanTest;
+	@apply scroll-smooth min-h-[100svh] h-full font-ThatThatNewRomanTest;
 }
 
 body {
-	@apply min-h-[100svh];
+	@apply min-h-[100svh] h-full;
 }
 
 #root {
-	@apply flex flex-col justify-center min-h-[100svh];
+	@apply flex flex-col justify-center h-full min-h-[100svh];
 }

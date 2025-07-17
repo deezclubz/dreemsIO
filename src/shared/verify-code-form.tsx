@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import api from '../services/api'
 import { ApiError } from './types'
-import { useAuth } from './hooks/useAuth'
+import { useAuth } from '../features/auth/hooks/useAuth'
+import { useNavigate } from 'react-router'
 
 export const VerifyCodeForm: React.FC = () => {
     const [code, setCode] = useState('')
     const [message, setMessage] = useState('')
     const { login } = useAuth()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault()
@@ -14,6 +16,7 @@ export const VerifyCodeForm: React.FC = () => {
             const response = await api.post('/auth/verify_code', { code })
 
             login(response.data.token)
+            navigate('/')
         } catch (error: unknown) {
             if (typeof error === 'object' && error !== null) {
                 const apiError = error as ApiError
@@ -21,6 +24,8 @@ export const VerifyCodeForm: React.FC = () => {
             } else {
                 setMessage('Error: ' + String(error))
             }
+        } finally {
+            console.log('Code verification auth completed')
         }
     }
 
