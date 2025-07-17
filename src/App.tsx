@@ -3,8 +3,18 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import { AuthProvider } from './app/provider/auth-provider'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './app/router'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 2,
+            refetchOnWindowFocus: false
+        }
+    }
+})
 
 const App = () => {
     if (!clientId) {
@@ -13,11 +23,13 @@ const App = () => {
     }
 
     return (
-        <AuthProvider>
-            <GoogleOAuthProvider clientId={clientId}>
-                <RouterProvider router={router} />
-            </GoogleOAuthProvider>
-        </AuthProvider>
+        <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+                <GoogleOAuthProvider clientId={clientId}>
+                    <RouterProvider router={router} />
+                </GoogleOAuthProvider>
+            </AuthProvider>
+        </QueryClientProvider>
     )
 }
 
