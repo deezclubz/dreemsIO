@@ -30,6 +30,9 @@ export const GoogleAuthButton: React.FC = () => {
     return (
         <GoogleLogin
             onSuccess={handleSuccess}
+            type="standard"
+            theme="outline"
+            size="large"
             onError={() => console.log('Login Failed')}
             useOneTap // Опционально: автоматическое всплывающее окно
             auto_select // Опционально: автоматический выбор аккаунта

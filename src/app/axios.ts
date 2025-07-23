@@ -11,13 +11,10 @@ export const apiClient = axios.create({
     }
 })
 
-console.log(apiClient)
-
 // Интерцептор для добавления токена
 apiClient.interceptors.request.use(config => {
     // Получаем токен из localStorage (или откуда вы его храните)
     const token = localStorage.getItem('authToken') || Cookies.get(CookieNames.AccessToken)
-
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
     }
@@ -28,7 +25,16 @@ apiClient.interceptors.request.use(config => {
 apiClient.interceptors.response.use(
     response => response,
     error => {
-        if (error.response?.status === 401) {
+        const originalRequest = error.config
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            try {
+                const token = localStorage.getItem('authToken')
+                if (token) {
+                    originalRequest.headers.Authorization = `Bearer ${token}`
+                }
+            } catch (refreshError) {
+                return Promise.reject(refreshError)
+            }
             // Здесь можно добавить логику выхода при 401 ошибке
             console.error('Unauthorized, logging out...')
             // Ваш хук useAuth должен быть доступен здесь или можно вызвать logout
