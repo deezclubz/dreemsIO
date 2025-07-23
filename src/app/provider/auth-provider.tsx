@@ -1,4 +1,5 @@
-import { createContext, useState, PropsWithChildren, Dispatch, SetStateAction } from 'react'
+import { useState, PropsWithChildren } from 'react'
+import { AuthContext } from '../../shared/lib/context/auth-context'
 
 // Тип для контекста аутентификации
 export type AuthContextType = {
@@ -7,10 +8,6 @@ export type AuthContextType = {
     logout: () => void
     isAuthenticated: boolean
 }
-
-// Создаем контекст с явным указанием типа
-type AuthState = boolean
-export const AuthContext = createContext<[AuthState, Dispatch<SetStateAction<AuthState>>]>([false, () => {}])
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const authState = useState(Boolean(localStorage.getItem('authToken')))
